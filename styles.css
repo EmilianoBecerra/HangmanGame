@@ -1,0 +1,97 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+main {
+  padding: 10px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.layout {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.rope {
+  width: 100px;
+}
+
+.skeleton {
+  position: relative;
+
+}
+
+.img-hanged {
+  width: 30px;
+}
+
+#head {
+  position: absolute;
+  top: -48px;
+  right: 7px;
+  display: none;
+}
+
+#body {
+  position: absolute;
+  top: -20px;
+  right: 7px;
+  display: none;
+}
+
+#pants {
+  position: absolute;
+  top: 7px;
+  right: 7.5px;
+  display: none;
+}
+
+#footer {
+  width: 18px;
+  position: absolute;
+  top: 30px;
+  right: 13px;
+  display: none;
+}
+
+.game {
+  width: 100%;
+  height: 150px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.finish {
+  animation-name: finish;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes finish {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(1000px);
+    opacity: 0;
+    display: none;
+  }
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+  <title>Juego del ahorcado</title>
+</head>
+
+<body>
+  <header>
+    <h1>Juego del Ahorcado</h1>
+  </header>
+  <main>
+    <div class="layout">
+      <div class="imgs" id="imgs">
+        <img src="ahorcado.png" alt="" class="rope">
+        <section class="skeleton">
+          <img class="img-hanged" id="head" src="cabeza.png" alt="">
+          <img class="img-hanged" id="body" src="camisa.png" alt="">
+          <img class="img-hanged" id="pants" src="pantalones.png" alt="">
+          <img class="img-hanged" id="footer" src="zapatos.png" alt="">
+        </section>
+      </div>
+      <div class="game">
+        <p class="word-display" id="word-display">_ _ _ _ _ _ </p> <br>
+        <form id="guess-form">
+          <label for="letter">Ingrese una letra:</label>
+          <input type="text" maxlength="1" id="letter" required>
+          <button type="submit" id="btn_ready">Adivinar</button>
+        </form>
+        <p id="letterAttempts"></p>
+        <p class="message" id="message"></p>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>

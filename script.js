@@ -29,7 +29,7 @@ wordDisplay.textContent = hiddenWord.join(" ");
 
 function updateDisplay() {
   wordDisplay.textContent = hiddenWord.join(" ");
-  letterAttempts.textContent = guessedLetter.join(",");
+  letterAttempts.textContent = guessedLetter.join("-");
 }
 
 function guessLetter() {
@@ -65,7 +65,7 @@ function winGame() {
   } else if (attempts == 4) {
     messageDisplay.textContent = "No te quedan mas intentos";
     letterInput.value = "";
-    const img = document.getElementById(`imgs`);
+    const img = document.getElementById(`skeleton`);
     img.classList.add("finish");
     btn_ready.disabled = true;
   }

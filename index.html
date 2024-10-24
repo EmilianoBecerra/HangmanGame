@@ -11,29 +11,27 @@
 
 <body>
   <header>
-    <h1>Juego del Ahorcado</h1>
+    <h1 class="title">Juego del Ahorcado</h1>
   </header>
   <main>
     <div class="layout">
-      <div class="imgs" id="imgs">
-        <img src="ahorcado.png" alt="" class="rope">
-        <section class="skeleton">
-          <img class="img-hanged" id="head" src="cabeza.png" alt="">
-          <img class="img-hanged" id="body" src="camisa.png" alt="">
-          <img class="img-hanged" id="pants" src="pantalones.png" alt="">
-          <img class="img-hanged" id="footer" src="zapatos.png" alt="">
-        </section>
-      </div>
-      <div class="game">
-        <p class="word-display" id="word-display">_ _ _ _ _ _ </p> <br>
-        <form id="guess-form">
-          <label for="letter">Ingrese una letra:</label>
-          <input type="text" maxlength="1" id="letter" required>
-          <button type="submit" id="btn_ready">Adivinar</button>
-        </form>
-        <p id="letterAttempts"></p>
-        <p class="message" id="message"></p>
-      </div>
+      <p class="word-display" id="word-display"></p>
+      <form id="guess-form">
+        <label for="letter">Ingrese una letra</label>
+        <input type="text" maxlength="1" id="letter" autofocus required>
+        <button type="submit" id="btn_ready">Adivinar</button>
+      </form>
+      <p id="letterAttempts"></p>
+      <p class="message" id="message"></p>
+    </div>
+    <div class="imgs" id="imgs">
+      <img src="ahorcado.png" width="60px" height="70px" alt="" class="rope">
+      <section class="skeleton" id="skeleton">
+        <img class="img-hanged" width="30px" height="30px" id="head" src="cabeza.png" alt="">
+        <img class="img-hanged" width="30px" height="30px" id="body" src="camisa.png" alt="">
+        <img class="img-hanged" width="30px" height="30px" id="pants" src="pantalones.png" alt="">
+        <img class="img-hanged" width="20px" height="20px" id="footer" src="zapatos.png" alt="">
+      </section>
     </div>
   </main>
 </body>

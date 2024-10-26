@@ -1,6 +1,6 @@
 const secretWords = [
   "Elefante",
-  /*  "Enchufe",
+  "Enchufe",
   "Antonio",
   "Astuto",
   "Orfanato",
@@ -8,10 +8,10 @@ const secretWords = [
   "Inspector",
   "Instituto",
   "Universo",
-  "Unico", */
+  "Unico",
 ];
 
-const boyd = ["head", "body", "pants", "footer"];
+const body = ["head", "body", "pants", "footer"];
 
 const secretWord = secretWords[Math.floor(Math.random() * secretWords.length)];
 
@@ -19,6 +19,7 @@ const hiddenWord = "_".repeat(secretWord.length).split("");
 const letterInput = document.getElementById("letter");
 const wordDisplay = document.getElementById("word-display");
 const guessForm = document.getElementById("guess-form");
+const btn_reset = document.getElementById("btn-reset");
 const btn_ready = document.getElementById("btn_ready");
 const messageDisplay = document.getElementById("message");
 const letterAttempts = document.getElementById("letterAttempts");
@@ -28,50 +29,61 @@ let attempts = 0;
 wordDisplay.textContent = hiddenWord.join(" ");
 
 function updateDisplay() {
+  letterInput.value = "";
   wordDisplay.textContent = hiddenWord.join(" ");
   letterAttempts.textContent = guessedLetter.join("-");
 }
 
 function guessLetter() {
-  winGame();
-  const letter = letterInput.value.toLowerCase();
+  messageDisplay.textContent = "";
+  const letter = letterInput.value;
+  const lowerSecretWord = secretWord.toLowerCase();
   if (!guessedLetter.includes(letter)) {
-    guessedLetter.push(letter);
-    updateDisplay();
-    if (
-      secretWord.includes(letter) ||
-      secretWord.includes(letter.toUpperCase())
-    ) {
+    if (lowerSecretWord.includes(letter)) {
       for (let i = 0; i < secretWord.length; i++) {
-        if (secretWord[i].toLocaleLowerCase() == letter) {
-          hiddenWord[i] = letter;
-          updateDisplay();
-        }
+        if (lowerSecretWord[i] === letter) hiddenWord[i] = letter;
       }
+      guessedLetter.push(letter);
     } else {
+      guessedLetter.push(letter);
+      if (attempts <= 3) {
+        const img = document.getElementById(`${body[attempts]}`);
+        img.style.display = "inline";
+      }
       attempts++;
-      const img = document.getElementById(`${boyd[attempts - 1]}`);
-      img.style.display = "inline";
     }
   } else {
-    messageDisplay.textContent = "Esa letra ya fue elegida";
+    messageDisplay.textContent = "Esa letra ya fue elegida.";
   }
-  letterInput.value = "";
+  updateDisplay();
 }
 
 function winGame() {
-  if (!hiddenWord.includes("_") && attempts != 5) {
-    messageDisplay.textContent = "Felicitaciones, GANASTE!!";
-  } else if (attempts == 4) {
-    messageDisplay.textContent = "No te quedan mas intentos";
-    letterInput.value = "";
-    const img = document.getElementById(`skeleton`);
+  if (!wordDisplay.innerText.includes("_") && attempts <= 4) {
+    messageDisplay.textContent = "GANASTE!";
+    message.classList.add("win");
+    btn_ready.style.display = "none";
+    btn_reset.style.display = "block";
+  } else if (attempts === 5) {
+    messageDisplay.textContent = "PERDISTE";
+    message.classList.add("loss");
+    btn_ready.style.display = "none";
+    btn_reset.style.display = "block";
+    const img = document.getElementById("skeleton");
     img.classList.add("finish");
-    btn_ready.disabled = true;
   }
 }
+
+function reset() {
+  wordDisplay.textContent = hiddenWord.join(" ");
+}
+
+/* function winGame() {} */
 
 btn_ready.addEventListener("click", (e) => {
   e.preventDefault();
   guessLetter();
+  winGame();
 });
+
+btn_reset.addEventListener("click", (e) => {});

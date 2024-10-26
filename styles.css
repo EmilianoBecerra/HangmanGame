@@ -23,14 +23,14 @@ h1 {
 }
 
 .layout {
+  display: block;
   padding: 10px;
   border: 1px solid black;
   margin: 0 10px;
   border-radius: 10px;
-  display: block;
   text-align: center;
   max-width: 400px;
-  height: auto;
+  height: 370px;
   margin-bottom: 5px;
 }
 
@@ -63,6 +63,7 @@ form label {
 }
 
 form #letter {
+  height: auto;
   text-align: center;
   font-size: 18px;
   border-radius: 4px;
@@ -71,28 +72,54 @@ form #letter {
   text-transform: uppercase;
 }
 
-form #btn_ready {
+form .btn {
   padding: 4px;
   width: 100px;
+  margin-bottom: 10px;
 }
 
+#btn_ready{
+  display: block;
+}
+
+#btn-reset{
+  display: none;
+}
+
+.letters {}
+
 #letterAttempts {
+  margin: auto;
   font-size: 18px;
   text-transform: uppercase;
   letter-spacing: 3px;
-  max-width: 230px;
-  text-align: center;
-  margin: auto;
-  border: 1px solid black;
-  border-radius: 3px;
-  padding: 3px;
+  max-width: 170px;
+  text-align: left;
+  border: none;
   margin-top: 10px;
-
+  height: 60px;
 }
 
 .message {
-  margin-top: 5px;
+  width: 100%;
+  margin-top: 30x;
   font-size: 16px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  box-shadow: 1px 1px 5px #000;
+  margin: 10px 0px;
+}
+
+.win {
+  background: rgb(159, 212, 159);
+}
+
+.loss {
+  color: white;
+  background: rgb(159, 3, 3);
 }
 
 .imgs {
@@ -103,8 +130,9 @@ form #btn_ready {
 
 .rope {
   position: relative;
-  left: 150px;
+  left: 110px;
   height: 100px;
+  width: 100px;
 }
 
 .skeleton {
@@ -114,7 +142,7 @@ form #btn_ready {
   align-items: center;
   position: relative;
   top: -50px;
-  left: 10px;
+  left: -6px;
 }
 
 .finish {
@@ -123,18 +151,26 @@ form #btn_ready {
   animation-fill-mode: forwards;
 }
 
-#head{
+#head {
   display: none;
 }
-#body{
+
+#body {
   display: none;
 }
-#pants{
+
+#pants {
   display: none;
 }
-#footer{
+
+#footer {
   display: none;
 }
+
+
+
+
+
 
 @keyframes finish {
   from {

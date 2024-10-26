@@ -18,9 +18,11 @@
       <p class="word-display" id="word-display"></p>
       <form id="guess-form">
         <label for="letter">Ingrese una letra</label>
-        <input type="text" maxlength="1" id="letter" autofocus required>
-        <button type="submit" id="btn_ready">Adivinar</button>
+        <input type="text" maxlength="1" id="letter" autofocus>
+        <button type="submit" id="btn_ready" class="btn">Adivinar</button>
+        <button type="submit" id="btn-reset" class="btn">Reiniciar</button>
       </form>
+      <span class="letters">Letras Elegidas</span>
       <p id="letterAttempts"></p>
       <p class="message" id="message"></p>
     </div>

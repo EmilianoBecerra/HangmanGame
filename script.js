@@ -1,20 +1,16 @@
 const secretWords = [
-  "Elefante",
-  "Enchufe",
-  "Antonio",
-  "Astuto",
-  "Orfanato",
-  "Ortiva",
-  "Inspector",
-  "Instituto",
-  "Universo",
-  "Unico",
+ "Costos",
+ "Peron",
+ "Evita",
+ "Doctrina",
+ "Verdad",
+ "Realidad",
+
 ];
 
 const body = ["head", "body", "pants", "footer"];
 
 const secretWord = secretWords[Math.floor(Math.random() * secretWords.length)];
-
 const hiddenWord = "_".repeat(secretWord.length).split("");
 const letterInput = document.getElementById("letter");
 const wordDisplay = document.getElementById("word-display");
@@ -53,6 +49,7 @@ function guessLetter() {
       attempts++;
     }
   } else {
+    messageDisplay.style.color = "black"
     messageDisplay.textContent = "Esa letra ya fue elegida.";
   }
   updateDisplay();
@@ -60,13 +57,18 @@ function guessLetter() {
 
 function winGame() {
   if (!wordDisplay.innerText.includes("_") && attempts <= 4) {
-    messageDisplay.textContent = "GANASTE!";
+    messageDisplay.textContent = "BIEN PERONISTA!";
     message.classList.add("win");
+    const imgRope = document.getElementById("rope");
+    const person = document.getElementById("skeleton");
+    person.style.display = "none";
+    imgRope.style.display = "none";
     btn_ready.style.display = "none";
     btn_reset.style.display = "block";
   } else if (attempts === 5) {
-    messageDisplay.textContent = "PERDISTE";
+    messageDisplay.textContent = "RADICAAAL";
     message.classList.add("loss");
+    message.style.color = "red";
     btn_ready.style.display = "none";
     btn_reset.style.display = "block";
     const img = document.getElementById("skeleton");

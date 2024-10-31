@@ -1,91 +1,125 @@
-const secretWords = [
- "Costos",
- "Peron",
- "Evita",
- "Doctrina",
- "Verdad",
- "Realidad",
-
+const palabraSecretas = [
+ "costos",
+ "peron",
+ "evita",
+ "doctrina",
+ "verdad",
+ "realidad",
+ "argentino",
+ "argentina",
+ "general",
+ "capitana",
+ "justicia",
+ "igualdad", 
 ];
 
+
+let palabraSecreta = palabraSecretas[Math.floor(Math.random() * palabraSecretas.length)];
+let palabraOculta = "_".repeat(palabraSecreta.length).split("");
+const letraIngresada = document.getElementById("letter");
+const palabraPantalla = document.getElementById("word-display");
+const formulario = document.getElementById("guess-form");
+const btnReiniciar = document.getElementById("btn-reset");
+const btnAdivinar = document.getElementById("btn_ready");
+const mensaje = document.getElementById("message");
+const letrasIntentadas = document.getElementById("letterAttempts");
+let letrasUsadas = [];
+let intentos = 0;
 const body = ["head", "body", "pants", "footer"];
+const efectoPerder = document.getElementById("skeleton");
 
-const secretWord = secretWords[Math.floor(Math.random() * secretWords.length)];
-const hiddenWord = "_".repeat(secretWord.length).split("");
-const letterInput = document.getElementById("letter");
-const wordDisplay = document.getElementById("word-display");
-const guessForm = document.getElementById("guess-form");
-const btn_reset = document.getElementById("btn-reset");
-const btn_ready = document.getElementById("btn_ready");
-const messageDisplay = document.getElementById("message");
-const letterAttempts = document.getElementById("letterAttempts");
-const guessedLetter = [];
-let attempts = 0;
+palabraPantalla.textContent = palabraOculta.join(" ");
 
-wordDisplay.textContent = hiddenWord.join(" ");
-
-function updateDisplay() {
-  letterInput.value = "";
-  wordDisplay.textContent = hiddenWord.join(" ");
-  letterAttempts.textContent = guessedLetter.join("-");
+const actualizarPantalla = () => {
+  letraIngresada.value = "";
+  palabraPantalla.textContent = palabraOculta.join(" ");
+  letrasIntentadas.textContent = letrasUsadas.join("-");
+  mostrarGanaste();
+  mostrarPerdiste();
 }
 
-function guessLetter() {
-  messageDisplay.textContent = "";
-  const letter = letterInput.value;
-  const lowerSecretWord = secretWord.toLowerCase();
-  if (!guessedLetter.includes(letter)) {
-    if (lowerSecretWord.includes(letter)) {
-      for (let i = 0; i < secretWord.length; i++) {
-        if (lowerSecretWord[i] === letter) hiddenWord[i] = letter;
+const verificarLetra = () => {
+  mensaje.textContent = "";
+  const letra = letraIngresada.value.toLowerCase();
+  if (!/^[a-z]$/i.test(letra)) {
+    mensaje.textContent = "Por favor, ingresa una letra válida";
+    return null;
+  }
+  if (letrasUsadas.includes(letra)) {
+    mensaje.style.color = "black";
+    mensaje.textContent = "Esa letra ya fue elegida";
+    return null;
+  }
+  letrasUsadas.push(letra);
+  if (!palabraSecreta.includes(letra)) {
+    intentos++;
+    const parteDelCuerpo = document.getElementById(body[intentos - 1]);
+    parteDelCuerpo.style.display = "block";
+  }
+  return letra;
+}
+
+const adivinarLetra = () => {
+  const letra = verificarLetra();
+    for(let i = 0; i < palabraSecreta.length; i++){
+      if(letra == palabraSecreta[i]){
+        palabraOculta[i] = letra;
       }
-      guessedLetter.push(letter);
-    } else {
-      guessedLetter.push(letter);
-      if (attempts <= 3) {
-        const img = document.getElementById(`${body[attempts]}`);
-        img.style.display = "inline";
-      }
-      attempts++;
     }
-  } else {
-    messageDisplay.style.color = "black"
-    messageDisplay.textContent = "Esa letra ya fue elegida.";
-  }
-  updateDisplay();
+  actualizarPantalla();
 }
 
-function winGame() {
-  if (!wordDisplay.innerText.includes("_") && attempts <= 4) {
-    messageDisplay.textContent = "BIEN PERONISTA!";
-    message.classList.add("win");
-    const imgRope = document.getElementById("rope");
-    const person = document.getElementById("skeleton");
-    person.style.display = "none";
-    imgRope.style.display = "none";
-    btn_ready.style.display = "none";
-    btn_reset.style.display = "block";
-  } else if (attempts === 5) {
-    messageDisplay.textContent = "RADICAAAL";
-    message.classList.add("loss");
-    message.style.color = "red";
-    btn_ready.style.display = "none";
-    btn_reset.style.display = "block";
-    const img = document.getElementById("skeleton");
-    img.classList.add("finish");
+const mostrarGanaste = () => {
+  if(!palabraOculta.includes("_") && intentos < 4){
+    mensaje.textContent = "Sos Peronista!!";
+    mensaje.style.color = "lightblue";
+    cambiarBotones();
   }
 }
 
-function reset() {
-  wordDisplay.textContent = hiddenWord.join(" ");
+const mostrarPerdiste = () => {
+  if(intentos == 4){
+    mensaje.style.color = "red";
+    mensaje.textContent = "Sos Radical";
+    efectoPerder.classList.add("finish");
+    cambiarBotones();
+  }
 }
 
-/* function winGame() {} */
+const cambiarBotones = () => {
+  btnAdivinar.classList.toggle("on");
+  btnReiniciar.classList.toggle("on");
+  letraIngresada.setAttribute("disabled", true);
+}
 
-btn_ready.addEventListener("click", (e) => {
+const nuevaPalabraSecreta = () => {
+  palabraSecreta = palabraSecretas[Math.floor(Math.random() * palabraSecretas.length)];
+  palabraOculta = "_".repeat(palabraSecreta.length).split("");
+}
+
+const reiniciarPantalla = () => {
+  if(intentos > 0){
+    for(let i = 0; i < intentos; i++){
+    const parteDelCuerpo = document.getElementById(body[i]);
+    parteDelCuerpo.style.display = "none";
+    }
+    intentos = 0;
+  }
+  cambiarBotones();
+  nuevaPalabraSecreta();
+  letrasUsadas = [];
+  efectoPerder.classList.remove("finish");
+  mensaje.textContent = "";
+  actualizarPantalla();
+  letraIngresada.removeAttribute("disabled");
+}
+
+btnAdivinar.addEventListener("click", (e) => {
   e.preventDefault();
-  guessLetter();
-  winGame();
+  adivinarLetra();
 });
 
-btn_reset.addEventListener("click", (e) => {});
+btnReiniciar.addEventListener("click", (e)=> {
+  e.preventDefault();
+  reiniciarPantalla();
+})

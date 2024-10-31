@@ -77,10 +77,11 @@ form {
   color: white;
   font-size: 16px;
   font-weight: 600;
+  display: none;
 }
 
-#btn-reset {
-  display: none;
+.on {
+  display: block;
 }
 
 .letters {
@@ -101,7 +102,7 @@ form {
   font-size: 20px;
   color: lightblue;
   font-weight: 600;
-
+  color: black;
 }
 
 .imgs {
@@ -162,7 +163,6 @@ form {
   display: none;
 }
 
-
 @keyframes finish {
   from {
     transform: translateY(0);
@@ -175,6 +175,7 @@ form {
     display: none;
   }
 }
+
 
 @media screen and (min-width: 390px) {
   .skeleton{
